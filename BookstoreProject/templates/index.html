@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria - Início</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Livraria</h1>
+            <nav class="nav">
+                <ul>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('dashboard') }}">Painel</a></li>
+                        <li><a href="{{ url_for('carrinho.carrinho') }}">Carrinho</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('register') }}">Registrar</a></li>
+                    {% endif %}
+                </ul>
+                <form class="search-form" action="{{ url_for('busca') }}" method="POST">
+                    <input type="text" name="termo" placeholder="Buscar livros..." aria-label="Buscar livros">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+        <section class="hero">
+            <h2>Bem-vindo à Livraria</h2>
+            <p>Explore nosso catálogo de livros incríveis!</p>
+        </section>
+
+        <section class="book-grid">
+            <h2>Catálogo de Livros</h2>
+            {% if livros %}
+                <div class="books">
+                    {% for livro in livros %}
+                        <article class="book-card">
+                            <h3>{{ livro.titulo }}</h3>
+                            <p>Por {{ livro.autor }}</p>
+                            <p class="price">R$ {{ livro.preco }}</p>
+                            <div class="book-actions">
+                                <a href="{{ url_for('detalhes_livro', id=livro.id) }}" class="btn btn-secondary">Ver Detalhes</a>
+                                <a href="{{ url_for('carrinho.adicionar_carrinho', id=livro.id) }}" class="btn btn-primary">Adicionar ao Carrinho</a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Nenhum livro disponível no momento.</p>
+            {% endif %}
+            
+            <div class="dashboard-actions">
+                <a href="{{ url_for('carrinho.carrinho') }}" class="btn btn-primary">Ver Carrinho</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Livraria. Todos os direitos reservados.</p>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

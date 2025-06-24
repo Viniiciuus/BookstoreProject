@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria - Resultados da Busca</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Livraria</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Início</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('dashboard') }}">Painel</a></li>
+                        <li><a href="{{ url_for('carrinho.carrinho') }}">Carrinho</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('register') }}">Registrar</a></li>
+                    {% endif %}
+                </ul>
+                <form class="search-form" action="{{ url_for('busca') }}" method="POST">
+                    <input type="text" name="termo" placeholder="Buscar livros..." aria-label="Buscar livros" value="{{ termo }}">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+        <section class="search-results">
+            <h2>Resultados da Busca</h2>
+            {% if termo %}
+                <p>Resultados para: "{{ termo }}"</p>
+            {% else %}
+                <p>Nenhum termo de busca especificado.</p>
+            {% endif %}
+
+            {% if livros %}
+                <div class="book-grid">
+                    {% for livro in livros %}
+                        <article class="book-card">
+                            <h3>{{ livro.titulo }}</h3>
+                            <p>Por {{ livro.autor }}</p>
+                            <p class="price">R$ {{ livro.preco }}</p>
+                            <div class="book-actions">
+                                <a href="{{ url_for('detalhes_livro', id=livro.id) }}" class="btn btn-secondary">Ver Detalhes</a>
+                                <a href="{{ url_for('carrinho.adicionar_carrinho', id=livro.id) }}" class="btn btn-primary">Adicionar ao Carrinho</a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Nenhum livro encontrado.</p>
+            {% endif %}
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar ao Catálogo</a>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Livraria. Todos os direitos reservados.</p>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

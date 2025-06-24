@@ -1,0 +1,365 @@
+/* Reset básico para remover margens e paddings padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilização geral do corpo */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Contêiner principal para centralizar e limitar largura */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Estilização do cabeçalho */
+.header {
+    background-color: #2a2a2a;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a90e2;
+}
+
+/* Navegação */
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #4a90e2;
+}
+
+/* Formulário de busca */
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-form input {
+    padding: 0.5rem;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    color: #e0e0e0;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+}
+
+.btn-secondary {
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+.btn-secondary:hover {
+    background-color: #4a90e2;
+}
+
+/* Seção hero (página inicial) */
+.hero {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+}
+
+/* Grid de livros */
+.book-grid {
+    padding: 2rem 0;
+}
+
+.book-grid h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-card {
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.book-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-card p {
+    font-size: 1rem;
+    color: #b0b0b0;
+    margin-bottom: 0.5rem;
+}
+
+.book-card .price {
+    font-weight: 700;
+    color: #4a90e2;
+}
+
+.book-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Cartões destacados para a seção de interesses no dashboard */
+.book-card-highlight {
+    transform: scale(1.0); /* Aumenta o tamanho em 15% */
+    background-color: #333333; /* Fundo um pouco mais claro para destaque */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+}
+
+/* Formulários (login e registro) */
+.form-section {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form label {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.form input {
+    padding: 0.5rem;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* Mensagens flash */
+.flash-success {
+    color: #4a90e2;
+    background-color: #1a3c34;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.flash-error {
+    color: #e24a4a;
+    background-color: #3c1a1a;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* Carrinho */
+.cart-section {
+    padding: 2rem 0;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cart-item {
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item h3 {
+    font-size: 1.2rem;
+}
+
+.cart-total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #4a90e2;
+    margin: 1rem 0;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Detalhes do livro */
+.book-details {
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.book-details h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.book-details p {
+    margin-bottom: 1rem;
+}
+
+.book-details .price {
+    font-weight: 700;
+    color: #4a90e2;
+}
+
+/* Seção de confirmação */
+.confirmation-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.confirmation-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Resultados de busca */
+.search-results {
+    padding: 2rem 0;
+}
+
+.search-results h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* Painel */
+.dashboard-section {
+    padding: 2rem 0;
+}
+
+.dashboard-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard-section h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #2a2a2a;
+    padding: 1rem 0;
+    text-align: center;
+    border-top: 1px solid #333333;
+}
+
+.footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.footer a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer a:hover {
+    color: #4a90e2;
+}

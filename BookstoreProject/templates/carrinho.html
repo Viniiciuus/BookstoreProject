@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria - Carrinho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Livraria</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Início</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Painel</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+        <section class="cart-section">
+            <h2>Seu Carrinho</h2>
+            {% if livros %}
+                <div class="cart-items">
+                    {% for livro in livros %}
+                        <article class="cart-item">
+                            <h3>{{ livro.titulo }}</h3>
+                            <p>R$ {{ livro.preco }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+                <p class="cart-total">Total: R$ {{ total }}</p>
+                <div class="cart-actions">
+                    <a href="{{ url_for('carrinho.finalizar') }}" class="btn btn-primary">Finalizar Compra</a>
+                    <a href="{{ url_for('carrinho.limpar_carrinho') }}" class="btn btn-secondary">Limpar Carrinho</a>
+                </div>
+            {% else %}
+                <p>Carrinho vazio.</p>
+            {% endif %}
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar ao Catálogo</a>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Livraria. Todos os direitos reservados.</p>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

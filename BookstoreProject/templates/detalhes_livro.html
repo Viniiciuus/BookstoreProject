@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria - {{ livro.titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho com navegação -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Livraria</h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Início</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('dashboard') }}">Painel</a></li>
+                        <li><a href="{{ url_for('carrinho.carrinho') }}">Carrinho</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('register') }}">Registrar</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+        <section class="book-details">
+            <h2>{{ livro.titulo }}</h2>
+            <p><strong>Por</strong> {{ livro.autor }}</p>
+            <p class="price">Preço: R$ {{ livro.preco }}</p>
+            <p><strong>Descrição:</strong> {{ livro.descricao }}</p>
+            <p><strong>Sinopse:</strong> {{ livro.sinopse }}</p>
+            <p><strong>Sobre o Autor:</strong> {{ livro.autor_info }}</p>
+            <div class="book-actions">
+                <a href="{{ url_for('carrinho.adicionar_carrinho', id=livro.id) }}" class="btn btn-primary">Adicionar ao Carrinho</a>
+                <a href="{{ url_for('carrinho.finalizar') }}" class="btn btn-primary">Comprar Agora</a>
+            </div>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar ao Catálogo</a>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Livraria. Todos os direitos reservados.</p>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
